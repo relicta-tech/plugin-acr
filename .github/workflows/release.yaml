@@ -132,6 +132,8 @@ jobs:
               - name: github
                 enabled: true
                 config:
+                  owner: relicta-tech
+                  repo: plugin-acr
                   draft: false
                   prerelease: false
                   generate_release_notes: true
