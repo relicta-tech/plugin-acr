@@ -109,20 +109,12 @@ jobs:
             release/${{ env.PLUGIN_NAME }}_linux_x86_64.tar.gz
             release/${{ env.PLUGIN_NAME }}_windows_x86_64.zip
 
-      - name: Clean working tree for relicta
-        run: |
-          # Move release artifacts outside git's view temporarily
-          mv release /tmp/release-artifacts
-          rm -rf dist
-          # Ensure working tree is clean
-          git status
-
       - name: Release with Relicta
         uses: relicta-tech/relicta-action@v2
         with:
           version: latest
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          command: release --yes
+          command: publish
           plugins: github
           config-content: |
             versioning:
@@ -138,6 +130,6 @@ jobs:
                   prerelease: false
                   generate_release_notes: true
                   assets:
-                    - "/tmp/release-artifacts/*.tar.gz"
-                    - "/tmp/release-artifacts/*.zip"
-                    - "/tmp/release-artifacts/checksums.txt"
+                    - "release/*.tar.gz"
+                    - "release/*.zip"
+                    - "release/checksums.txt"
