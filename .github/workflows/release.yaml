@@ -109,6 +109,11 @@ jobs:
             release/${{ env.PLUGIN_NAME }}_linux_x86_64.tar.gz
             release/${{ env.PLUGIN_NAME }}_windows_x86_64.zip
 
+      - name: Ignore build artifacts for clean working tree
+        run: |
+          echo "dist/" >> .gitignore
+          echo "release/" >> .gitignore
+
       - name: Release with Relicta
         uses: relicta-tech/relicta-action@v2
         with:
