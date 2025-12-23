@@ -109,21 +109,10 @@ jobs:
             release/${{ env.PLUGIN_NAME }}_linux_x86_64.tar.gz
             release/${{ env.PLUGIN_NAME }}_windows_x86_64.zip
 
-      - name: Debug - List release files
-        run: |
-          echo "=== Files in release directory ==="
-          ls -la release/
-          echo "=== Current working directory ==="
-          pwd
-
       - name: Clean working tree for relicta
         run: |
-          # Move release artifacts outside git's view temporarily
           mv release /tmp/release-artifacts
           rm -rf dist
-          echo "=== Files in /tmp/release-artifacts ==="
-          ls -la /tmp/release-artifacts/
-          # Ensure working tree is clean
           git status
 
       - name: Release with Relicta
